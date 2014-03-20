@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GuardianDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="GuardianDBModelStoreContainer">
+          <EntitySet Name="TBL_LOGIN" EntityType="GuardianDBModel.Store.TBL_LOGIN" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TBL_USERRECORD" EntityType="GuardianDBModel.Store.TBL_USERRECORD" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="TBL_LOGIN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="USERNAME" Type="varchar" MaxLength="50" />
+          <Property Name="PASSWORD" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TBL_USERRECORD">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="THREAD_TYPE" Type="varchar" MaxLength="50" />
+          <Property Name="MSG_BODY" Type="varchar(max)" />
+          <Property Name="PHONE_NUMBER" Type="varchar" MaxLength="50" />
+          <Property Name="TYPE" Type="varchar" MaxLength="50" />
+          <Property Name="DATE_TIME" Type="datetime" />
+          <Property Name="CALL_DURATION" Type="numeric" />
+          <Property Name="LINK_TITLE" Type="text" />
+          <Property Name="LINK_URL" Type="text" />
+          <Property Name="LONGITUDE" Type="real" />
+          <Property Name="LATITUDE" Type="real" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GuardianDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="GuardianDBEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="TBL_LOGIN" EntityType="GuardianDBModel.TBL_LOGIN" />
+          <EntitySet Name="TBL_USERRECORD" EntityType="GuardianDBModel.TBL_USERRECORD" />
+        </EntityContainer>
+        <EntityType Name="TBL_LOGIN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="USERNAME" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PASSWORD" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Email" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TBL_USERRECORD">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="THREAD_TYPE" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MSG_BODY" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PHONE_NUMBER" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="TYPE" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DATE_TIME" />
+          <Property Type="Decimal" Name="CALL_DURATION" Precision="18" Scale="0" />
+          <Property Type="String" Name="LINK_TITLE" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="LINK_URL" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Single" Name="LONGITUDE" />
+          <Property Type="Single" Name="LATITUDE" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GuardianDBModelStoreContainer" CdmEntityContainer="GuardianDBEntities" >
+          <EntitySetMapping Name="TBL_LOGIN">
+            <EntityTypeMapping TypeName="GuardianDBModel.TBL_LOGIN">
+              <MappingFragment StoreEntitySet="TBL_LOGIN">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_USERRECORD">
+            <EntityTypeMapping TypeName="GuardianDBModel.TBL_USERRECORD">
+              <MappingFragment StoreEntitySet="TBL_USERRECORD">
+                <ScalarProperty Name="LATITUDE" ColumnName="LATITUDE" />
+                <ScalarProperty Name="LONGITUDE" ColumnName="LONGITUDE" />
+                <ScalarProperty Name="LINK_URL" ColumnName="LINK_URL" />
+                <ScalarProperty Name="LINK_TITLE" ColumnName="LINK_TITLE" />
+                <ScalarProperty Name="CALL_DURATION" ColumnName="CALL_DURATION" />
+                <ScalarProperty Name="DATE_TIME" ColumnName="DATE_TIME" />
+                <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+                <ScalarProperty Name="PHONE_NUMBER" ColumnName="PHONE_NUMBER" />
+                <ScalarProperty Name="MSG_BODY" ColumnName="MSG_BODY" />
+                <ScalarProperty Name="THREAD_TYPE" ColumnName="THREAD_TYPE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Guardian" >
+        <EntityTypeShape EntityType="GuardianDBModel.TBL_LOGIN" Width="1.5" PointX="0.75" PointY="0.75" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="GuardianDBModel.TBL_USERRECORD" Width="1.5" PointX="2.75" PointY="0.75" Height="3.1340950520833388" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
