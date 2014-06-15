@@ -151,8 +151,14 @@ namespace TheGuardian.Controllers
                         login.Email = email;
                         login.PASSWORD = password;
                         login.USERNAME = username;
+
+                        db.AddToTBL_LOGIN(login);
+                        db.SaveChanges();
+
                         response.Status = true;
                         response.Response = username + "You have sussesfully Registered";
+                        response.UserID = login.ID;
+
                      
                        
                     }

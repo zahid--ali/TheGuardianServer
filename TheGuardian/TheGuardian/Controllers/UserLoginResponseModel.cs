@@ -9,5 +9,7 @@ namespace TheGuardian.Controllers
     {
         public string Response { get; set; }
         public bool Status { get; set; }
+        public int UserID { get; set; }
+
     }
 }

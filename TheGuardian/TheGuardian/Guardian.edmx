@@ -6,9 +6,20 @@
     <edmx:StorageModels>
     <Schema Namespace="GuardianDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="GuardianDBModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="GuardianDBModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TBL_LOGIN" EntityType="GuardianDBModel.Store.TBL_LOGIN" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TBL_USERRECORD" EntityType="GuardianDBModel.Store.TBL_USERRECORD" store:Type="Tables" Schema="dbo" />
         </EntityContainer>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="TBL_LOGIN">
           <Key>
             <PropertyRef Name="ID" />
@@ -27,12 +38,14 @@
           <Property Name="MSG_BODY" Type="varchar(max)" />
           <Property Name="PHONE_NUMBER" Type="varchar" MaxLength="50" />
           <Property Name="TYPE" Type="varchar" MaxLength="50" />
-          <Property Name="DATE_TIME" Type="datetime" />
-          <Property Name="CALL_DURATION" Type="numeric" />
+          <Property Name="DATE_TIME" Type="varchar" MaxLength="50" />
+          <Property Name="CALL_DURATION" Type="varchar" MaxLength="50" />
           <Property Name="LINK_TITLE" Type="text" />
           <Property Name="LINK_URL" Type="text" />
-          <Property Name="LONGITUDE" Type="real" />
-          <Property Name="LATITUDE" Type="real" />
+          <Property Name="LONGITUDE" Type="varchar" MaxLength="50" />
+          <Property Name="LATITUDE" Type="varchar" MaxLength="50" />
+          <Property Name="UserID" Type="varchar" MaxLength="50" />
+          <Property Name="UserDataID" Type="varchar" MaxLength="50" />
         </EntityType>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -41,31 +54,44 @@
         <EntityContainer Name="GuardianDBEntities" annotation:LazyLoadingEnabled="true" >
           <EntitySet Name="TBL_LOGIN" EntityType="GuardianDBModel.TBL_LOGIN" />
           <EntitySet Name="TBL_USERRECORD" EntityType="GuardianDBModel.TBL_USERRECORD" />
+          <EntitySet Name="sysdiagrams" EntityType="GuardianDBModel.sysdiagram" />
         </EntityContainer>
         <EntityType Name="TBL_LOGIN">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="USERNAME" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="PASSWORD" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Email" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="USERNAME" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="PASSWORD" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="Email" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
         </EntityType>
         <EntityType Name="TBL_USERRECORD">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="THREAD_TYPE" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="MSG_BODY" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="PHONE_NUMBER" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="TYPE" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="DATE_TIME" />
-          <Property Type="Decimal" Name="CALL_DURATION" Precision="18" Scale="0" />
-          <Property Type="String" Name="LINK_TITLE" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="LINK_URL" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Type="Single" Name="LONGITUDE" />
-          <Property Type="Single" Name="LATITUDE" />
+          <Property Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="THREAD_TYPE" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="MSG_BODY" MaxLength="Max" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="PHONE_NUMBER" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="TYPE" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="DATE_TIME" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="CALL_DURATION" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="LINK_TITLE" MaxLength="Max" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="LINK_URL" MaxLength="Max" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="LONGITUDE" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="LATITUDE" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="UserID" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Type="String" Name="UserDataID" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="principal_id" Nullable="false" />
+          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="version" />
+          <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -86,6 +112,8 @@
           <EntitySetMapping Name="TBL_USERRECORD">
             <EntityTypeMapping TypeName="GuardianDBModel.TBL_USERRECORD">
               <MappingFragment StoreEntitySet="TBL_USERRECORD">
+                <ScalarProperty Name="UserDataID" ColumnName="UserDataID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="LATITUDE" ColumnName="LATITUDE" />
                 <ScalarProperty Name="LONGITUDE" ColumnName="LONGITUDE" />
                 <ScalarProperty Name="LINK_URL" ColumnName="LINK_URL" />
@@ -97,6 +125,17 @@
                 <ScalarProperty Name="MSG_BODY" ColumnName="MSG_BODY" />
                 <ScalarProperty Name="THREAD_TYPE" ColumnName="THREAD_TYPE" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="GuardianDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -121,8 +160,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="Guardian" >
-        <EntityTypeShape EntityType="GuardianDBModel.TBL_LOGIN" Width="1.5" PointX="0.75" PointY="0.75" Height="1.7879850260416674" />
-        <EntityTypeShape EntityType="GuardianDBModel.TBL_USERRECORD" Width="1.5" PointX="2.75" PointY="0.75" Height="3.1340950520833388" />
+        <EntityTypeShape EntityType="GuardianDBModel.TBL_LOGIN" PointX="0.75" PointY="0.75" Width="1.5" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="GuardianDBModel.TBL_USERRECORD" PointX="3.375" PointY="0.75" Width="1.5" Height="3.3263964843749996" />
+        <EntityTypeShape EntityType="GuardianDBModel.sysdiagram" Width="1.5" PointX="0.75" PointY="3.75" Height="1.9802864583333317" />
       </Diagram>
     </Diagrams>
   </Designer>

@@ -17,6 +17,7 @@ namespace TheGuardian.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        GuardianDBEntities db = new GuardianDBEntities();
         //
         // GET: /Account/Login
 
@@ -35,10 +36,22 @@ namespace TheGuardian.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+            string username = model.UserName;
+            string password = model.Password;
+            int c = (from zid in db.TBL_LOGIN
+                     where zid.USERNAME == username && zid.PASSWORD == password
+                     select zid).Count();
+
+            if (c.Equals(1))
             {
-                return RedirectToLocal(returnUrl);
+                //FormsAuthentication.Authenticate(
+                //WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe);
+                return RedirectToAction("Contact", "Home");
             }
+            //if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+            //{
+            //    return RedirectToLocal(returnUrl);
+            //}
 
             // If we got this far, something failed, redisplay form
             ModelState.AddModelError("", "The user name or password provided is incorrect.");

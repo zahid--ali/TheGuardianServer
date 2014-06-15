@@ -1,0 +1,81 @@
+﻿@model IEnumerable<TheGuardian.Models.UserData>
+@{
+    ViewBag.Title = "ShowData";
+}
+<h2>
+    ShowData</h2>
+<table class="table table-bordered">
+    <tr>
+        <th>
+
+            @Html.DisplayNameFor(model => model.THREADTYPE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BODY)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PHONE_NUMBER)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TYPE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DATE_TIME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CALL_DURATION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TITLE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.URL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LONGITUDE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LATITUDE)
+        </th>
+        <th>
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.THREADTYPE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BODY)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PHONE_NUMBER)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TYPE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DATE_TIME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CALL_DURATION)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TITLE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.URL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LONGITUDE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LATITUDE)
+            </td>
+            <td>
+                @Html.ActionLink("Remove", "Delete", item.USERID)
+            </td>
+        </tr>
+    }
+</table>
